@@ -1,0 +1,21 @@
+# Add 'Documentation' label to any change to .md files within the entire repository 
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: docs/**
+
+# Add 'dependencies' label to any change in requirements.txt
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file: 'requirements.txt'
+
+# Add 'bug' label to any PR where the head branch name starts with `bugfix`, `hotfix`, `bug`, `fix`, 
+bug:
+  - head-branch: ['bugfix', 'hotfix', 'bug', 'fix']
+
+# Add 'enhancement' label to any PR where the head branch name starts with `feature` or `feat``
+enhancement:
+  - head-branch: ['feature', 'feat']
+
+# Add 'release' label to any PR where the head branch name starts with `release`
+release:
+  - head-branch: ['release']
