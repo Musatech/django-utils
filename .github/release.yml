@@ -1,0 +1,22 @@
+changelog:
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - Semver-Major
+        - breaking-change
+        - release
+        - rel
+    - title: New Features 🎉
+      labels:
+        - Semver-Minor
+        - enhancement
+        - feat
+        - feature
+        - doc
+    - title: Fixes
+      labels:
+        - Semver-Patch
+        - fix
+        - bug
+        - dep
+        - dependencies
