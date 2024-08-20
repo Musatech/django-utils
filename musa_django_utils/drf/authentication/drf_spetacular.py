@@ -5,7 +5,7 @@ from drf_spectacular.extensions import OpenApiAuthenticationExtension
 
 
 class BaseRemoteAuthScheme(OpenApiAuthenticationExtension):  # pragma: no cover
-    target_class = 'musa_django_utils.drf.authentication.jwt.BaseRemoteAuthentication'
+    target_class = 'musa_django_utils.drf.authentication.jwt.JwtAuthentication'
     name = 'Bearer Token Authentication'
     priority = 0
     match_subclasses = True
@@ -30,7 +30,7 @@ class BaseRemoteAuthScheme(OpenApiAuthenticationExtension):  # pragma: no cover
 
 
 class WmsCookieAuthScheme(OpenApiAuthenticationExtension):  # pragma: no cover
-    target_class = 'musa_django_utils.drf.authentication.old_django.OldDjangoSessionAuthentication'
+    target_class = 'musa_django_utils.drf.authentication.old_django.OldDjangoCookieSessionAuthentication'
     name = 'Django Session Cookie Authentication'
     priority = 0
 
