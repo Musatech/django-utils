@@ -46,7 +46,7 @@ class BaseDecodeToken:
 
 
 class OldDjangoCookieSessionAuthentication(MultiProviderMixin, authentication.BaseAuthentication, BaseDecodeToken):
-    authentication_in = 'cookies'
+    authentication_in = 'COOKIES'
     authentication_field = settings.SESSION_COOKIE_NAME
 
     def get_user(self, request, session_data):

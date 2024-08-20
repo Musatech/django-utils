@@ -35,4 +35,4 @@ class MultiProviderMixin:
     def get_token(self, request):
         find_in = self.config.get('AUTHENTICATION_IN', self.authentication_in)
         field_name = self.config.get('AUTHENTICATION_FIELD', self.authentication_field)
-        return getattr(getattr(request, find_in, {}), field_name, '')
+        return getattr(request, find_in, {}).get(field_name, '')
