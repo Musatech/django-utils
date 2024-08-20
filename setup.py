@@ -3,7 +3,7 @@ from io import open
 
 from setuptools import find_packages, setup
 
-from src import __version__
+from musa_django_utils import __version__
 
 setup(
     name='musa-django-utils',
