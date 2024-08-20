@@ -25,14 +25,14 @@ class MultiProviderMixin:
         return self.config.get(key, default)
 
     def validate_provider(self, request):
-        provider_value = self.config.get('PROVIDER_HEADER_VALUE')
+        provider_value = self.get_config('PROVIDER_HEADER_VALUE')
         if provider_value:
-            provider = self.config.get('PROVIDER_HEADER', self.provider_header)
-            return request.headers[provider] == provider
+            provider = self.get_config('PROVIDER_HEADER', self.provider_header)
+            return request.headers.get(provider) == provider_value
 
         return True
 
     def get_token(self, request):
-        find_in = self.config.get('AUTHENTICATION_IN', self.authentication_in)
-        field_name = self.config.get('AUTHENTICATION_FIELD', self.authentication_field)
+        find_in = self.get_config('AUTHENTICATION_IN', self.authentication_in)
+        field_name = self.get_config('AUTHENTICATION_FIELD', self.authentication_field)
         return getattr(request, find_in, {}).get(field_name, '')

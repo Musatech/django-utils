@@ -24,7 +24,7 @@ class JwtAuthentication(MultiProviderMixin, BaseAuthentication):
             raise Exception(f'`JWK_URL` is not present in `{self.config_name}`')
 
         elif 'KEYS' not in self.config:
-            self.config['KEYS'] = get_well_know_keys(self.config)
+            self.config['KEYS'] = get_well_know_keys(self.get_config('JWK_URL'))
 
         return [key for key in self.config['KEYS'] if key['kid'] == kid][0]
 
