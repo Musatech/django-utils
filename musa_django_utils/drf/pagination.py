@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-from django_restql.mixins import DynamicFieldsMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
@@ -50,6 +49,7 @@ works in nested data: `?fields={fieldNested{id}}`
 """)
 
     def get_schema_operation_parameters(self, view):
+        from django_restql.mixins import DynamicFieldsMixin
         parameters = super().get_schema_operation_parameters(view)
 
         # add default page_size to documentation
