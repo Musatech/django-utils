@@ -1,7 +1,7 @@
 from django_filters.filters import ChoiceFilter, MultipleChoiceFilter
 
 
-class ArrayChoiceMixin:
+class ArrayMixin:
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('lookup_expr', 'contains')
@@ -19,9 +19,9 @@ class ArrayChoiceMixin:
         return qs.distinct() if self.distinct else qs
 
 
-class ArrayChoiceFilter(ChoiceFilter, ArrayChoiceMixin):
+class ArrayChoiceFilter(ArrayMixin, ChoiceFilter):
     pass
 
 
-class ArrayMultipleChoiceFilter(MultipleChoiceFilter, ArrayChoiceMixin):
+class ArrayMultipleChoiceFilter(ArrayMixin, MultipleChoiceFilter):
     pass
