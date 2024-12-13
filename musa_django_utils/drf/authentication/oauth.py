@@ -11,6 +11,7 @@ from rest_framework.exceptions import AuthenticationFailed
 
 from .utils import get_well_know_keys
 
+
 try:
     from .drf_spetacular import *  # noqa this don`t broke app`s without drf-spectacular
 except ModuleNotFoundError:
