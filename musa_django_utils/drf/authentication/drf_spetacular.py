@@ -5,7 +5,7 @@ from drf_spectacular.extensions import OpenApiAuthenticationExtension
 
 
 class BaseRemoteAuthScheme(OpenApiAuthenticationExtension):  # pragma: no cover
-    target_class = 'musa_django_utils.drf.oauth.jwt.BaseOauthAuthentication'
+    target_class = 'musa_django_utils.drf.authentication.oauth.BaseOauthAuthentication'
     name = 'Bearer Token Authentication'
     priority = 0
     match_subclasses = True
