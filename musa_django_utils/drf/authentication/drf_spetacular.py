@@ -5,7 +5,7 @@ from drf_spectacular.extensions import OpenApiAuthenticationExtension
 
 
 class BaseRemoteAuthScheme(OpenApiAuthenticationExtension):  # pragma: no cover
-    target_class = 'musa_django_utils.drf.authentication.jwt.JwtAuthentication'
+    target_class = 'musa_django_utils.drf.oauth.jwt.BaseOauthAuthentication'
     name = 'Bearer Token Authentication'
     priority = 0
     match_subclasses = True
@@ -15,18 +15,13 @@ class BaseRemoteAuthScheme(OpenApiAuthenticationExtension):  # pragma: no cover
         self.name = getattr(self.target, 'name', self.name)
 
     def get_security_definition(self, auto_schema):
-        data = {
+        return {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'Authorization',
             'bearerFormat': 'JWT',
             # 'description': _('Token-based authentication')
         }
-        if provider := self.target.get_config('PROVIDER_HEADER_VALUE'):
-            field_name = self.target.get_config('PROVIDER_HEADER', self.target.provider_header)
-            data['description'] = _(f'You need to set a `{field_name}` with a value `{provider}` in header')
-
-        return data
 
 
 class WmsCookieAuthScheme(BaseRemoteAuthScheme):  # pragma: no cover
