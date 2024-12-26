@@ -1,5 +1,5 @@
 from django_filters.filters import (BaseInFilter, CharFilter, ChoiceFilter, DateFilter, MultipleChoiceFilter,
-                                    NumberFilter, SlugFilter, UUIDFilter)
+                                    NumberFilter, UUIDFilter)
 
 
 class ArrayMixin:
@@ -33,10 +33,6 @@ class NumberInFilter(BaseInFilter, NumberFilter):
 
 
 class CharInFilter(BaseInFilter, CharFilter):
-    pass
-
-
-class SlugInFilter(BaseInFilter, SlugFilter):
     pass
 
 
