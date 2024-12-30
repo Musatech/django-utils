@@ -11,7 +11,6 @@ from rest_framework.exceptions import AuthenticationFailed
 
 from .utils import get_well_know_keys
 
-
 try:
     from .drf_spetacular import *  # noqa this don`t broke app`s without drf-spectacular
 except ModuleNotFoundError:
@@ -28,10 +27,7 @@ class BaseOauthAuthentication(BaseAuthentication):
     ]
 
     def get_well_know_key(self, iss, kid):
-        if 'JWK' not in settings.REST_FRAMEWORK:
-            settings.REST_FRAMEWORK['JWK'] = []
-
-        elif iss not in settings.REST_FRAMEWORK['JWK']:
+        if iss not in settings.REST_FRAMEWORK.get('JWK', []):
             for pattern, url in self.jwk_urls:
                 if re.match(pattern, iss):
                     settings.REST_FRAMEWORK['JWK'] = {iss: get_well_know_keys(f'{iss}{url}')}
