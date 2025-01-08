@@ -17,7 +17,7 @@ class KeyCloakAppAuth(metaclass=Singleton):
     _expires = datetime.min
 
     def __init__(self, **kwargs) -> None:
-        self.keycloak_url = kwargs.get('keycloak_base_url') or kwargs.get('KEYCLOAK_BASE_URL')
+        self.keycloak_url = kwargs.get('base_url') or kwargs.get('BASE_URL')
         self.realm = kwargs.get('realm') or kwargs.get('REALM')
         self.client_id = kwargs.get('client_id') or kwargs.get('CLIENT_ID')
         self.client_secret = kwargs.get('client_secret') or kwargs.get('CLIENT_SECRET')
