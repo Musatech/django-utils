@@ -30,8 +30,9 @@ class KeyCloakAppAuth(metaclass=Singleton):
         if res.status_code != 200:
             raise Exception(f'Error renewing token: {res.text}')
 
-        self._token = res.json()['access_token']
-        self._expires = datetime.now() + timedelta(seconds=res['expires_in'] - 20)
+        data = res.json()
+        self._token = data['access_token']
+        self._expires = datetime.now() + timedelta(seconds=data['expires_in'] - 20)
 
     @property
     def token(self):
