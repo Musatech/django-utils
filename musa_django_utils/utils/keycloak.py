@@ -24,9 +24,13 @@ class KeyCloakAppAuth(metaclass=Singleton):
 
     def renew_token(self):
         url = f'{self.keycloak_url}/realms/{self.realm}/protocol/openid-connect/token'
-        data = {"grant_type":  "client_credentials", "client_id": self.client_id, "client_secret": self.client_secret}
-        res = post(url, data=data, timeout=5).json()
-        self._token = res['access_token']
+        data = {"grant_type": "client_credentials", "client_id": self.client_id, "client_secret": self.client_secret}
+
+        res = post(url, data=data, timeout=5)
+        if res.status_code != 200:
+            raise Exception(f'Error renewing token: {res.text}')
+
+        self._token = res.json()['access_token']
         self._expires = datetime.now() + timedelta(seconds=res['expires_in'] - 20)
 
     @property
