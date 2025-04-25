@@ -12,15 +12,7 @@ class BaseDeletedManager(Manager):
 class BaseDeletedQueryset(QuerySet):
 
     def all(self, deleted=False):
-        if deleted is not None:
-            self._filter_deleted = deleted
-            return self.filter(deleted=deleted)
-        return super().all()
-
-    def filter(self, *args, **kwargs):
-        if hasattr(self, '_filter_deleted'):
-            kwargs['deleted'] = self._filter_deleted
-        return super().filter(*args, **kwargs)
+        return self.filter(deleted=deleted)
 
     def delete(self):
         self.update(deleted=True, updated_at=timezone.now())
