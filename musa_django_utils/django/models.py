@@ -12,7 +12,9 @@ class BaseDeletedManager(Manager):
 class BaseDeletedQueryset(QuerySet):
 
     def all(self, deleted=False):
-        return self.filter(deleted=deleted)
+        if deleted is not None:
+            return self.filter(deleted=deleted)
+        return super().all()
 
     def delete(self):
         self.update(deleted=True, updated_at=timezone.now())
