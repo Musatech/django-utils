@@ -16,7 +16,9 @@ class BaseDeletedQueryset(QuerySet):
             return self.filter(deleted=deleted)
         return super().all()
 
-    def delete(self):
+    def delete(self, hard_delete=False):
+        if hard_delete:
+            return super().delete()
         self.update(deleted=True, updated_at=timezone.now())
 
     def as_manager(cls):
