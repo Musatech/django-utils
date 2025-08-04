@@ -72,3 +72,7 @@ works in nested data: `?fields={fieldNested{id}}`
             )
 
         return parameters
+
+
+class LargePagination(StandardPagination):
+    max_page_size = 9999
