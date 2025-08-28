@@ -10,6 +10,7 @@ class BaseDeletedManager(Manager):
 
 
 class BaseDeletedQueryset(QuerySet):
+    manager = BaseDeletedManager
 
     def all(self, deleted=False):
         if deleted is not None:
@@ -21,8 +22,8 @@ class BaseDeletedQueryset(QuerySet):
             return super().delete()
         self.update(deleted=True, updated_at=timezone.now())
 
-    def as_manager(cls):
-        manager = BaseDeletedManager.from_queryset(cls)()
+    def as_manager(self):
+        manager = self.manager.from_queryset(self)()
         manager._built_with_as_manager = True
         return manager
 
