@@ -1,5 +1,4 @@
-from django_filters.filters import (BaseInFilter, CharFilter, ChoiceFilter, DateFilter, MultipleChoiceFilter,
-                                    NumberFilter, UUIDFilter)
+from django_filters.filters import ChoiceFilter, MultipleChoiceFilter
 
 
 class ArrayMixin:
@@ -25,20 +24,4 @@ class ArrayChoiceFilter(ArrayMixin, ChoiceFilter):
 
 
 class ArrayMultipleChoiceFilter(ArrayMixin, MultipleChoiceFilter):
-    pass
-
-
-class NumberInFilter(BaseInFilter, NumberFilter):
-    pass
-
-
-class CharInFilter(BaseInFilter, CharFilter):
-    pass
-
-
-class UUIDInFilter(BaseInFilter, UUIDFilter):
-    pass
-
-
-class DateInFilter(BaseInFilter, DateFilter):
     pass
