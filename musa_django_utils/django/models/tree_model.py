@@ -107,7 +107,7 @@ class TreeModel(Model):
                       .filter(tree_id__startswith=old_values['tree_id'])\
                       .update(tree_id=Replace(F('tree_id'), Value(old_values['tree_id']), Value(tree_id)))
 
-        self.save()
+        super().save(*args, **kwargs)
 
     class Meta:
         abstract = True
