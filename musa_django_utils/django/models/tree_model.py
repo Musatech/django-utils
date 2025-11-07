@@ -71,6 +71,10 @@ class TreeModel(Model):
     def tree_level(self):
         return self.tree_id.count(self.TREE_SEP)
 
+    @property
+    def ancestors_ids(self):
+        return self.tree_id.split(self.TREE_SEP)[:-1]
+
     def _generate_tree_id(self):
         """
         Generates the tree_id based on the parent's tree_id and the instance's ID.
