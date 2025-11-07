@@ -87,27 +87,27 @@ class TreeModel(Model):
 
     @atomic
     def save(self, *args, **kwargs):
-        if not self.pk:
-            super().save(*args, **kwargs)
-            self.tree_id = self._generate_tree_id()
+        if self.pk:
+            # Update tree_id if parent changed
+            old_values = type(self).objects.filter(pk=self.pk).values("parent_id", "tree_id").first()
+            if self.parent_id != old_values.get("parent_id"):
+                # Prevent circular references: check if parent is one of the descendants
+                if f"{self.TREE_SEP}{self.pk}{self.TREE_SEP}" in self.parent.tree_id:
+                    raise ValidationError("Cannot set a descendant as parent. This would create a circular reference.")
 
-        # Update tree_id if parent changed
-        old_values = type(self).objects.filter(pk=self.pk).values("parent_id", "tree_id").first()
-        if self.parent_id != old_values.get("parent_id"):
-            # Prevent circular references: check if parent is one of the descendants
-            if f"{self.TREE_SEP}{self.pk}{self.TREE_SEP}" in self.parent.tree_id:
-                raise ValidationError("Cannot set a descendant as parent. This would create a circular reference.")
+                # If trying to set self as parent
+                if self.parent.pk == self.pk:
+                    raise ValidationError("Cannot set self as parent. This would create a circular reference.")
 
-            # If trying to set self as parent
-            if self.parent.pk == self.pk:
-                raise ValidationError("Cannot set self as parent. This would create a circular reference.")
-
-            tree_id = self._generate_tree_id()
-            type(self).objects\
-                      .filter(tree_id__startswith=old_values['tree_id'])\
-                      .update(tree_id=Replace(F('tree_id'), Value(old_values['tree_id']), Value(tree_id)))
+                tree_id = self._generate_tree_id()
+                type(self).objects\
+                          .filter(tree_id__startswith=old_values['tree_id'])\
+                          .update(tree_id=Replace(F('tree_id'), Value(old_values['tree_id']), Value(tree_id)))
 
         super().save(*args, **kwargs)
+        if not self.tree_id:  # When creating, set tree_id after pk is available
+            self.tree_id = self._generate_tree_id()
+            self.save(update_fields=['tree_id'])
 
     class Meta:
         abstract = True
