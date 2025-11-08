@@ -69,19 +69,19 @@ class TreeModel(Model):
 
     @property
     def tree_level(self):
-        return self.tree_id.count(self.TREE_SEP)
+        return self.tree_id.count(self.TREE_SEP) - 1
 
     @property
     def ancestors_ids(self):
-        return self.tree_id.split(self.TREE_SEP)[:-1]
+        return self.tree_id.split(self.TREE_SEP).split(self.TREE_SEP)[:-1]
 
     def _generate_tree_id(self):
         """
         Generates the tree_id based on the parent's tree_id and the instance's ID.
         """
         aux = f"{self.pk}{self.TREE_SEP}"
-        aux = f"{self.parent.tree_id}{aux}" if self.parent else aux
-        if aux.count(self.TREE_SEP) + 1 > self.MAX_TREE_LEVEL:
+        aux = f"{self.parent.tree_id}{aux}" if self.parent else f"{self.TREE_SEP}{aux}"
+        if self.tree_level > self.MAX_TREE_LEVEL:
             raise ValidationError(f"Maximum tree level of {self.MAX_TREE_LEVEL} exceeded.")
         return aux
 
