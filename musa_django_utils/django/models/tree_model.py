@@ -73,7 +73,7 @@ class TreeModel(Model):
 
     @property
     def ancestors_ids(self):
-        return self.tree_id.split(self.TREE_SEP).split(self.TREE_SEP)[:-1]
+        return self.tree_id.strip(self.TREE_SEP).split(self.TREE_SEP)[:-1]
 
     def _generate_tree_id(self):
         """
