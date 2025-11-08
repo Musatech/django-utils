@@ -80,7 +80,7 @@ class TreeModel(Model):
         Generates the tree_id based on the parent's tree_id and the instance's ID.
         """
         aux = f"{self.pk}{self.TREE_SEP}"
-        aux = f"{self.parent.tree_id}{aux}" if self.parent else f"{self.pk}"
+        aux = f"{self.parent.tree_id}{aux}" if self.parent else aux
         if aux.count(self.TREE_SEP) + 1 > self.MAX_TREE_LEVEL:
             raise ValidationError(f"Maximum tree level of {self.MAX_TREE_LEVEL} exceeded.")
         return aux
@@ -99,10 +99,10 @@ class TreeModel(Model):
                 if self.parent.pk == self.pk:
                     raise ValidationError("Cannot set self as parent. This would create a circular reference.")
 
-                tree_id = self._generate_tree_id()
+                self.tree_id = self._generate_tree_id()
                 type(self).objects\
                           .filter(tree_id__startswith=old_values['tree_id'])\
-                          .update(tree_id=Replace(F('tree_id'), Value(old_values['tree_id']), Value(tree_id)))
+                          .update(tree_id=Replace(F('tree_id'), Value(old_values['tree_id']), Value(self.tree_id)))
 
         super().save(*args, **kwargs)
         if not self.tree_id:  # When creating, set tree_id after pk is available
