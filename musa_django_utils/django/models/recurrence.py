@@ -109,7 +109,7 @@ class RecurrenceQuerySet(QuerySet):
         return [r[0] for r in rows]
 
 
-class Recurrence(Model):
+class RecurrenceModel(Model):
     kind = CharField(max_length=16, choices=RecurrenceKind.choices, db_index=True)
     start_date = DateField(db_index=True)
     end_date = DateField(null=True, db_index=True)
@@ -125,6 +125,10 @@ class Recurrence(Model):
     class Meta:
         abstract = True
         constraints = [
+            CheckConstraint(
+                check=Q(kind__in=RecurrenceKind.values),
+                name="%(app_label)s_%(class)s_valid_kind",
+            ),
             # end_date >= start_date
             CheckConstraint(
                 check=Q(end_date__isnull=True) | Q(end_date__gte=F("start_date")),
