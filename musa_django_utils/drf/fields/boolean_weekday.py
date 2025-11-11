@@ -1,22 +1,32 @@
 from rest_framework import serializers
 
 
-class BooleanWeekdayField(serializers.Field):
+class BooleanWeekDayField(serializers.Field):
     WEEKDAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
-    def to_internal_value(self, data):
-        # Normalize input (e.g. "monday" → "mon")
-        data = data.strip().lower()[:3]
-        if data not in self.WEEKDAYS:
-            raise serializers.ValidationError(f"Invalid weekday '{data}'.")
+    def to_internal_value(self, data: list[str]):
+        """
+        convert a list of strings (weekdays) to a list of booleans (length 7).
+        Ex: ["mon", "wed"] -> [True, False, True, False, False, False, False]
+        """
+        if not isinstance(data, list):
+            raise serializers.ValidationError("The value must be a list of strings.")
 
-        # Create boolean list
-        return [day == data for day in self.WEEKDAYS]
+        bool_days = [False] * 7
+        for day in data:
+            if day[:3] not in self.WEEKDAYS:
+                raise serializers.ValidationError(f"Invalid day: {day}")
 
-    def to_representation(self, value):
-        # Optional: reverse transform list → name
-        try:
-            index = value.index(True)
-            return self.WEEKDAYS[index]
-        except ValueError:
-            return None
+            bool_days[self.WEEKDAYS.index(day[:3])] = True
+        return bool_days
+
+    def to_representation(self, value: list[bool]):
+        """
+        Convert a list of booleans (length 7)
+        to a list of strings with the corresponding days set to True.
+        Example: [True, False, True, False, False, False, False] -> ["mon", "wed"]
+        """
+        if not isinstance(value, (list, tuple)) or len(value) != 7:
+            raise serializers.ValidationError("The value must be a list of 7 booleans.")
+
+        return [day for day, flag in zip(self.WEEKDAYS, value) if flag]
