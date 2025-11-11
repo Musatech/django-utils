@@ -125,6 +125,10 @@ class RecurrenceModel(Model):
     class Meta:
         abstract = True
         constraints = [
+            CheckConstraint(
+                check=Q(kind__in=RecurrenceKind.values),
+                name="%(app_label)s_%(class)s_valid_kind",
+            ),
             # end_date >= start_date
             CheckConstraint(
                 check=Q(end_date__isnull=True) | Q(end_date__gte=F("start_date")),
