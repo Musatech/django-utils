@@ -22,7 +22,6 @@ class BooleanMonthDayField(serializers.Field):
         to a list of strings with the corresponding days set to True.
         Example: [True, False, True, False, False, False, False] -> [1, 3]
         """
-        if not isinstance(value, (list, tuple)) or len(value) != 31:
-            raise serializers.ValidationError("The value must be a list of 31 booleans.")
-
-        return [i + 1 for i, flag in enumerate(value) if flag]
+        if isinstance(value, (list, tuple)) and len(value) == 31:
+            return [i + 1 for i, flag in enumerate(value) if flag]
+        return []
