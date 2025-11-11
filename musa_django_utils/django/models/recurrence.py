@@ -56,7 +56,6 @@ class RecurrenceQuerySet(QuerySet):
                 OR ({table}.kind = '{RecurrenceKind.MONTHLY_NTH}'
                     AND {table}.week_days[EXTRACT(ISODOW FROM d.occur_date)::int] IS TRUE
                     AND (((EXTRACT(DAY FROM d.occur_date)::int - 1) / 7) + 1) = {table}.nth)
-                    AND {table}.week_days[EXTRACT(ISODOW FROM d.occur_date)::int] IS TRUE)
             )
         )
         """
@@ -98,7 +97,6 @@ class RecurrenceQuerySet(QuerySet):
             OR (r.kind = '{RecurrenceKind.MONTHLY_NTH}'
                 AND r.week_days[EXTRACT(ISODOW FROM d.occur_date)::int] IS TRUE
                 AND (((EXTRACT(DAY FROM d.occur_date)::int - 1) / 7) + 1) = r.nth)
-                AND r.week_days[EXTRACT(ISODOW FROM d.occur_date)::int] IS TRUE)
           )
         ORDER BY d.occur_date;
         """
