@@ -69,10 +69,14 @@ class TreeModel(Model):
 
     @property
     def tree_level(self):
+        if self.tree_id is None:
+            return 0
         return self.tree_id.count(self.TREE_SEP) - 1
 
     @property
     def ancestors_ids(self):
+        if self.tree_id is None:
+            return []
         return self.tree_id.strip(self.TREE_SEP).split(self.TREE_SEP)[:-1]
 
     def _generate_tree_id(self):
