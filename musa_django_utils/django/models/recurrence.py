@@ -109,7 +109,7 @@ class RecurrenceQuerySet(QuerySet):
         return [r[0] for r in rows]
 
 
-class Recurrence(Model):
+class RecurrenceModel(Model):
     kind = CharField(max_length=16, choices=RecurrenceKind.choices, db_index=True)
     start_date = DateField(db_index=True)
     end_date = DateField(null=True, db_index=True)
