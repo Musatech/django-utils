@@ -116,7 +116,7 @@ class RecurrenceModel(Model):
     repeat_every = PositiveSmallIntegerField(null=True)  # EVERY_NTH (Every N units, Ex: every 14 days)
     week_days = ArrayField(BooleanField(), size=7, null=True, default=list)  # WEEKLY, MONTHLY_NTH
     month_days = ArrayField(BooleanField(), size=31, null=True, default=list)  # MONTHLY_DAYS
-    nth = PositiveSmallIntegerField(null=True, blank=True, validators=[MaxValueValidator(5)])  # MONTHLY_NTH (every nth week)
+    nth = PositiveSmallIntegerField(null=True, validators=[MaxValueValidator(5)])  # MONTHLY_NTH (every nth week)
 
     objects = RecurrenceQuerySet.as_manager()
 
