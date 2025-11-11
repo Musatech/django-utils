@@ -26,7 +26,6 @@ class BooleanWeekDayField(serializers.Field):
         to a list of strings with the corresponding days set to True.
         Example: [True, False, True, False, False, False, False] -> ["mon", "wed"]
         """
-        if not isinstance(value, (list, tuple)) or len(value) != 7:
-            raise serializers.ValidationError("The value must be a list of 7 booleans.")
-
-        return [day for day, flag in zip(self.WEEKDAYS, value) if flag]
+        if isinstance(value, (list, tuple)) and len(value) == 7:
+            return [day for day, flag in zip(self.WEEKDAYS, value) if flag]
+        return []
