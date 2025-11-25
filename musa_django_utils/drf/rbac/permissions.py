@@ -1,7 +1,6 @@
 from enum import IntEnum
 
 # ====== MÓDULOS ======
-
 class Modules(IntEnum):
     USERS = 1
     ROUTES = 2
@@ -11,35 +10,29 @@ class Modules(IntEnum):
 
 
 # ====== PERMISSÕES POR MÓDULO ======
-
 class PermissionsUsers(IntEnum):
-    ALL = 1
-    READ = 2
-    CREATE = 3
-    EDIT = 4
-    DELETE = 5
-
+    READ = 1
+    CREATE = 2
+    EDIT = 3
+    DELETE = 4
 
 class PermissionsRoutes(IntEnum):
-    ALL = 1
-    READ = 2
-    CREATE = 3
-    EDIT = 4
-    DELETE = 5
+    READ = 1
+    CREATE = 2
+    EDIT = 3
+    DELETE = 4
 
 class PermissionsCollects(IntEnum):
-    ALL = 1
-    READ = 2
-    CREATE = 3
-    EDIT = 4
-    DELETE = 5
+    READ = 1
+    CREATE = 2
+    EDIT = 3
+    DELETE = 4
 
 class PermissionsBilling(IntEnum):
-    ALL = 1
-    READ = 2
-    CREATE = 3
-    EDIT = 4
-    DELETE = 5
+    READ = 1
+    CREATE = 2
+    EDIT = 3
+    DELETE = 4
 
 class PermissionsAudit(IntEnum):
     READ = 1
