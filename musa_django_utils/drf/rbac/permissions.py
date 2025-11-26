@@ -11,27 +11,27 @@ class Modules(IntEnum):
 
 # ====== PERMISSÕES POR MÓDULO ======
 class PermissionsUsers(IntEnum):
-    READ = 1
-    CREATE = 2
-    EDIT = 3
+    CREATE = 1
+    READ = 2
+    UPDATE = 3
     DELETE = 4
 
 class PermissionsRoutes(IntEnum):
-    READ = 1
-    CREATE = 2
-    EDIT = 3
+    CREATE = 1
+    READ = 2
+    UPDATE = 3
     DELETE = 4
 
 class PermissionsCollects(IntEnum):
-    READ = 1
-    CREATE = 2
-    EDIT = 3
+    CREATE = 1
+    READ = 2
+    UPDATE = 3
     DELETE = 4
 
 class PermissionsBilling(IntEnum):
-    READ = 1
-    CREATE = 2
-    EDIT = 3
+    CREATE = 1
+    READ = 2
+    UPDATE = 3
     DELETE = 4
 
 class PermissionsAudit(IntEnum):
