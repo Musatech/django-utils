@@ -15,6 +15,7 @@ class WeekDaysField(ArrayField):
     }
 
     def __init__(self, *args, **kwargs):
+        kwargs.pop("base_field", None)
         kwargs["size"] = 7
         super().__init__(models.BooleanField(), *args, **kwargs)
 
