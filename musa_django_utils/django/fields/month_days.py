@@ -8,7 +8,7 @@ class MonthDaysField(ArrayField):
         kwargs["size"] = 31
         super().__init__(models.BooleanField(), *args, **kwargs)
 
-    def to_python(self, value):
+    def _normalize(self, value):
         if value is None:
             return value
 
@@ -23,3 +23,7 @@ class MonthDaysField(ArrayField):
                 return days
 
         raise ValidationError("Invalid format for month_days")
+
+    def get_db_prep_value(self, value, connection, prepared=False):
+        value = self._normalize(value)
+        return super().get_db_prep_value(value, connection, prepared=prepared)
