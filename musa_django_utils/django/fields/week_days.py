@@ -15,9 +15,8 @@ class WeekDaysField(ArrayField):
     }
 
     def __init__(self, *args, **kwargs):
-        kwargs["base_field"] = models.BooleanField()
         kwargs["size"] = 7
-        super().__init__(*args, **kwargs)
+        super().__init__(models.BooleanField(), *args, **kwargs)
 
     def to_python(self, value):
         if value is None:

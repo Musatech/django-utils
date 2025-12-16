@@ -115,8 +115,8 @@ class RecurrenceModel(Model):
 
     on_date = DateField(null=True)  # DATE
     repeat_every = PositiveSmallIntegerField(null=True)  # EVERY_NTH (Every N units, Ex: every 14 days)
-    week_days = WeekDaysField(BooleanField(), null=True, default=list)  # WEEKLY, MONTHLY_NTH
-    month_days = MonthDaysField(BooleanField(), null=True, default=list)  # MONTHLY_DAYS
+    week_days = WeekDaysField(null=True, default=list)  # WEEKLY, MONTHLY_NTH
+    month_days = MonthDaysField(null=True, default=list)  # MONTHLY_DAYS
     nth = PositiveSmallIntegerField(null=True, validators=[MaxValueValidator(5)])  # MONTHLY_NTH (every nth week)
 
     objects = RecurrenceQuerySet.as_manager()
