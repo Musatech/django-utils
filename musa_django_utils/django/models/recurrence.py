@@ -1,11 +1,12 @@
 from datetime import date, timedelta
 
-from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator
 from django.db import connection
 from django.db.models import CheckConstraint, F, Model, Q, QuerySet, TextChoices
 from django.db.models.expressions import RawSQL
 from django.db.models.fields import BooleanField, CharField, DateField, PositiveSmallIntegerField
+
+from musa_django_utils.django.fields import MonthDaysField, WeekDaysField
 
 
 class RecurrenceKind(TextChoices):
@@ -114,8 +115,8 @@ class RecurrenceModel(Model):
 
     on_date = DateField(null=True)  # DATE
     repeat_every = PositiveSmallIntegerField(null=True)  # EVERY_NTH (Every N units, Ex: every 14 days)
-    week_days = ArrayField(BooleanField(), size=7, null=True, default=list)  # WEEKLY, MONTHLY_NTH
-    month_days = ArrayField(BooleanField(), size=31, null=True, default=list)  # MONTHLY_DAYS
+    week_days = WeekDaysField(BooleanField(), null=True, default=list)  # WEEKLY, MONTHLY_NTH
+    month_days = MonthDaysField(BooleanField(), null=True, default=list)  # MONTHLY_DAYS
     nth = PositiveSmallIntegerField(null=True, validators=[MaxValueValidator(5)])  # MONTHLY_NTH (every nth week)
 
     objects = RecurrenceQuerySet.as_manager()
