@@ -5,9 +5,10 @@ from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 
 
-class BaseBrDocumentValidator:
+@deconstructible
+class CPFCNPJValidator:
     code = "invalid_document"
-    message = _("Invalid document number.")
+    message = _("Invalid document number. Must be a valid CPF or CNPJ.")
     accept_cnpj = True
     accept_cpf = True
 
@@ -53,17 +54,12 @@ class BaseBrDocumentValidator:
 
 
 @deconstructible
-class CPFCNPJValidator(BaseBrDocumentValidator):
-    message = _("Invalid document number. Must be a valid CPF or CNPJ.")
-
-
-@deconstructible
-class CPFValidator(BaseBrDocumentValidator):
+class CPFValidator(CPFCNPJValidator):
     message = _("Invalid document number. Must be a valid CPF.")
     accept_cnpj = False
 
 
 @deconstructible
-class CNPJValidator(BaseBrDocumentValidator):
+class CNPJValidator(CPFCNPJValidator):
     message = _("Invalid document number. Must be a valid CNPJ.")
     accept_cpf = False
