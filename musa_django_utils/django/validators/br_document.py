@@ -53,17 +53,17 @@ class BaseBrDocumentValidator:
 
 
 @deconstructible
-class CpfCnpjValidator(BaseBrDocumentValidator):
+class CPFCNPJValidator(BaseBrDocumentValidator):
     message = _("Invalid document number. Must be a valid CPF or CNPJ.")
 
 
 @deconstructible
-class CpfValidator(BaseBrDocumentValidator):
+class CPFValidator(BaseBrDocumentValidator):
     message = _("Invalid document number. Must be a valid CPF.")
     accept_cnpj = False
 
 
 @deconstructible
-class CnpjValidator(BaseBrDocumentValidator):
+class CNPJValidator(BaseBrDocumentValidator):
     message = _("Invalid document number. Must be a valid CNPJ.")
     accept_cpf = False
