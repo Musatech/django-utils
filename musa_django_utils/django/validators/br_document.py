@@ -1,0 +1,69 @@
+import re
+
+from django.core.exceptions import ValidationError
+from django.utils.deconstruct import deconstructible
+from django.utils.translation import gettext_lazy as _
+
+
+class BaseBrDocumentValidator:
+    code = "invalid_document"
+    message = _("Invalid document number.")
+    accept_cnpj = True
+    accept_cpf = True
+
+    def __call__(self, value):
+        value = re.sub(r"\D", "", value)
+
+        if len(value) == 11 and self.accept_cpf:
+            if not self._is_valid_cpf(value):
+                raise ValidationError(self.message, code=self.code)
+
+        elif len(value) == 14 and self.accept_cnpj:
+            if not self._is_valid_cnpj(value):
+                raise ValidationError(self.message, code=self.code)
+
+        else:
+            raise ValidationError(self.message, code=self.code)
+
+    def _is_valid_cpf(self, cpf):
+        if cpf == cpf[0] * 11:
+            return False
+
+        for i in range(9, 11):
+            soma = sum(int(cpf[num]) * ((i + 1) - num) for num in range(i))
+            digito = ((soma * 10) % 11) % 10
+            if digito != int(cpf[i]):
+                return False
+        return True
+
+    def _is_valid_cnpj(self, cnpj):
+        if cnpj == cnpj[0] * 14:
+            return False
+
+        pesos_1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+        pesos_2 = [6] + pesos_1
+
+        for pesos in (pesos_1, pesos_2):
+            soma = sum(int(cnpj[i]) * pesos[i] for i in range(len(pesos)))
+            digito = 11 - (soma % 11)
+            digito = 0 if digito >= 10 else digito
+            if digito != int(cnpj[len(pesos)]):
+                return False
+        return True
+
+
+@deconstructible
+class CPFCNPJValidator(BaseBrDocumentValidator):
+    message = _("Invalid document number. Must be a valid CPF or CNPJ.")
+
+
+@deconstructible
+class CPFValidator(BaseBrDocumentValidator):
+    message = _("Invalid document number. Must be a valid CPF.")
+    accept_cnpj = False
+
+
+@deconstructible
+class CNPJValidator(BaseBrDocumentValidator):
+    message = _("Invalid document number. Must be a valid CNPJ.")
+    accept_cpf = False
