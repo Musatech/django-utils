@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class MonthDaysField(ArrayField):
@@ -23,7 +24,7 @@ class MonthDaysField(ArrayField):
                     days[day - 1] = True
                 return days
 
-        raise ValidationError("Invalid format for month_days")
+        raise ValidationError(_("Invalid format for month_days"))
 
     def get_db_prep_value(self, value, connection, prepared=False):
         value = self._normalize(value)

@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-14 17:22-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: django/fields/month_days.py:27
+msgid "Invalid format for month_days"
+msgstr "Formato inválido para month_days"
+
+#: django/fields/week_days.py:34
+msgid "Invalid format for week_days"
+msgstr "Formato inválido para week_days"
+
+#: django/models/tree.py:90
+#, python-brace-format
+msgid "Maximum tree level of {self.MAX_TREE_LEVEL} exceeded."
+msgstr "Excedido o nível máximo da árvore de {self.MAX_TREE_LEVEL}."
+
+#: django/models/tree.py:101
+msgid ""
+"Cannot set a descendant as parent. This would create a circular reference."
+msgstr ""
+"Não é possível definir um descendente como pai. Isso criaria uma referência circular."
+
+#: django/models/tree.py:105
+msgid "Cannot set self as parent. This would create a circular reference."
+msgstr "Não é possível definir a si mesmo como pai. Isso criaria uma referência circular."
+
+#: django/validators/br_document.py:11
+msgid "Invalid document number. Must be a valid CPF or CNPJ."
+msgstr "Número de documento inválido. Deve ser um CPF ou CNPJ válido."
+
+#: django/validators/br_document.py:58
+msgid "Invalid document number. Must be a valid CPF."
+msgstr "Número de documento inválido. Deve ser um CPF válido."
+
+#: django/validators/br_document.py:64
+msgid "Invalid document number. Must be a valid CNPJ."
+msgstr "Número de documento inválido. Deve ser um CNPJ válido."
+
+#: django/validators/char.py:90
+msgid "Must not contain repeated words."
+msgstr "Não deve conter palavras repetidas."
+
+#: django/validators/char.py:98
+msgid "Must not contain sequentially repeated words."
+msgstr "Não deve conter palavras repetidas sequencialmente."
+
+#: django/validators/char.py:116
+msgid "Each word must contain only alphabetic characters."
+msgstr "Cada palavra deve conter apenas caracteres alfabéticos."
+
+#: django_filters/dates.py:14
+msgid "Accepts mm-yyyy, multiple values may be separated by commas."
+msgstr "Aceita mm-aaaa, múltiplos valores podem ser separados por vírgulas."
+
+#: django_filters/dates.py:36
+msgid ""
+"Invalid format. expected mm-yyyy (ex: 04-2025). or mm-yyyy,mm-yyyy (ex: "
+"04-2025,05-2025)."
+msgstr ""
+"Formato inválido. Esperado mm-aaaa (ex: 04-2025) ou mm-aaaa,mm-aaaa (ex: 04-2025,05-2025)."
+
+#: django_filters/filters/many_to_many.py:21
+msgid ""
+"Accepts values like '2' for exact value, '3+' for 3 or more or '4-' for 4 or "
+"less."
+msgstr ""
+"Aceita valores como '2' para valor exato, '3+' para 3 ou mais ou '4-' para 4 ou menos."
+
+#: drf/authentication/oauth.py:64
+msgid "invalid or expired token"
+msgstr "token inválido ou expirado"
+
+#: drf/fields/boolean_monthday.py:14
+msgid "Must be a list of integers."
+msgstr "Deve ser uma lista de inteiros."
+
+#: drf/fields/boolean_weekday.py:15
+msgid "Must be a list of strings."
+msgstr "Deve ser uma lista de strings."
+
+#: drf/fields/boolean_weekday.py:20
+#, python-brace-format
+msgid "Invalid day: {day}"
+msgstr "Dia inválido: {day}"
+
+#: drf/pagination/standard.py:44
+msgid ""
+"Use to filter fields in response (for fast response and low data "
+"consumption).\n"
+"\n"
+"You can specify fields to show using his name ex: `?fields={fieldName}` and "
+"`?fields={fieldName, field2Name}`, to\n"
+"exclude some fields, you can put `-` before a name, ex: `?fields={-fieldName}"
+"` and `?fields={-fieldName, -field2Name}`,\n"
+"works in nested data: `?fields={fieldNested{id}}`\n"
+msgstr "Use para filtrar campos na resposta (para resposta rápida e baixo consumo de dados).\n"
+"\n"
+"Você pode especificar campos para mostrar usando seu nome ex: `?fields={fieldName}` e `?fields={fieldName, field2Name}`, para\n"
+"excluir alguns campos, você pode colocar `-` antes de um nome, ex: `?fields={-fieldName}` e `?fields={-fieldName, -field2Name}`,\n"
+"funciona em dados aninhados: `?fields={fieldNested{id}}`\n"
+
+#: drf/validators.py:11
+msgid "This field cannot contain spaces"
+msgstr "Este campo não pode conter espaços"
+
+#: drf/validators.py:24
+msgid "This field is required."
+msgstr "Este campo é obrigatório."

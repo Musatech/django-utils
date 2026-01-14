@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 from rest_framework import serializers
 
 
@@ -9,7 +11,7 @@ class BooleanMonthDayField(serializers.Field):
         Ex: [1, 3] -> [True, False, True, False, False, .., False]
         """
         if not isinstance(data, list):
-            raise serializers.ValidationError("The value must be a list of integers.")
+            raise serializers.ValidationError(_("Must be a list of integers."))
 
         bool_days = [False] * 31
         for day in data:
