@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import F, Manager, Model, QuerySet, Value
 from django.db.models.functions import Replace
 from django.db.transaction import atomic
+from django.utils.translation import gettext_lazy as _
 
 
 class TreeModelManager(Manager):
@@ -86,7 +87,7 @@ class TreeModel(Model):
         aux = f"{self.pk}{self.TREE_SEP}"
         aux = f"{self.parent.tree_id}{aux}" if self.parent else f"{self.TREE_SEP}{aux}"
         if self.tree_level > self.MAX_TREE_LEVEL:
-            raise ValidationError(f"Maximum tree level of {self.MAX_TREE_LEVEL} exceeded.")
+            raise ValidationError(_("Maximum tree level of {self.MAX_TREE_LEVEL} exceeded."))
         return aux
 
     @atomic
@@ -97,11 +98,11 @@ class TreeModel(Model):
             if self.parent_id != old_values.get("parent_id"):
                 # Prevent circular references: check if parent is one of the descendants
                 if f"{self.TREE_SEP}{self.pk}{self.TREE_SEP}" in self.parent.tree_id:
-                    raise ValidationError("Cannot set a descendant as parent. This would create a circular reference.")
+                    raise ValidationError(_("Cannot set a descendant as parent. This would create a circular reference."))
 
                 # If trying to set self as parent
                 if self.parent.pk == self.pk:
-                    raise ValidationError("Cannot set self as parent. This would create a circular reference.")
+                    raise ValidationError(_("Cannot set self as parent. This would create a circular reference."))
 
                 self.tree_id = self._generate_tree_id()
                 type(self).objects\

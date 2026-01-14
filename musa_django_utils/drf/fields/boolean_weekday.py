@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 from rest_framework import serializers
 
 
@@ -10,12 +12,12 @@ class BooleanWeekDayField(serializers.Field):
         Ex: ["mon", "wed"] -> [True, False, True, False, False, False, False]
         """
         if not isinstance(data, list):
-            raise serializers.ValidationError("The value must be a list of strings.")
+            raise serializers.ValidationError(_("Must be a list of strings."))
 
         bool_days = [False] * 7
         for day in data:
             if day[:3] not in self.WEEKDAYS:
-                raise serializers.ValidationError(f"Invalid day: {day}")
+                raise serializers.ValidationError(_("Invalid day: {day}"))
 
             bool_days[self.WEEKDAYS.index(day[:3])] = True
         return bool_days
