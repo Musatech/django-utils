@@ -122,6 +122,7 @@ class NameValidator:
         self.validators = [
             AlphabeticWordsValidator(allow_null=allow_null, allow_blank=allow_blank),
             WordsCountValidator(2, operation='min', allow_null=allow_null, allow_blank=allow_blank),
+            WordLengthValidator(2, operation='min', allow_null=allow_null, allow_blank=allow_blank),
             RepeatedWordsValidator(scope='sequential', allow_null=allow_null, allow_blank=allow_blank)
         ]
 
