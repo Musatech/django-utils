@@ -1,2 +1,3 @@
 from .br_document import *  # noqa
-from .length import *  # noqa
+from .char import *  # noqa
+from .list import *  # noqa
