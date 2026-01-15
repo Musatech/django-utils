@@ -24,15 +24,15 @@ class WordsCountValidator:
 
         if self.operation == 'min' and len(value.strip().split()) < self.words:
             raise ValidationError(
-                _(f"Value must have at least {self.words} words.")
+                _(f"Must have at least {self.words} words.")
             )
         elif self.operation == 'max' and len(value.strip().split()) > self.words:
             raise ValidationError(
-                _(f"Value must have no more than {self.words} words.")
+                _(f"Must have no more than {self.words} words.")
             )
         elif self.operation == 'exact' and len(value.strip().split()) != self.words:
             raise ValidationError(
-                _(f"Value must have exactly {self.words} words.")
+                _(f"Must have exactly {self.words} words.")
             )
 
 
@@ -87,7 +87,7 @@ class RepeatedWordsValidator:
             for word in words:
                 if word in seen:
                     raise ValidationError(
-                        _("Value must not contain repeated words.")
+                        _("Must not contain repeated words.")
                     )
                 seen.add(word)
         elif self.scope == 'sequential':
@@ -95,7 +95,7 @@ class RepeatedWordsValidator:
             for i in range(1, len(words)):
                 if words[i] == words[i - 1]:
                     raise ValidationError(
-                        _("Value must not contain sequentially repeated words.")
+                        _("Must not contain sequentially repeated words.")
                     )
 
 

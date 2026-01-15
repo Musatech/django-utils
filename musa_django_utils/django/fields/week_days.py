@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class WeekDaysField(ArrayField):
@@ -30,7 +31,7 @@ class WeekDaysField(ArrayField):
             if set(value).issubset(set(self.WEEKDAY_INDEX.keys())):
                 return [day in value for day in self.WEEKDAY_INDEX]
 
-        raise ValidationError("Invalid format for week_days")
+        raise ValidationError(_("Invalid format for week_days"))
 
     def get_db_prep_value(self, value, connection, prepared=False):
         value = self._normalize(value)
