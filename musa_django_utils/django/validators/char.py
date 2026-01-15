@@ -117,6 +117,7 @@ class AlphabeticWordsValidator:
                 )
 
 
+@deconstructible
 class NameValidator:
     def __init__(self, allow_null=False, allow_blank=False):
         self.validators = [
