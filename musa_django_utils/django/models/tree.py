@@ -95,14 +95,16 @@ class TreeModel(Model):
         if self.pk:
             # Update tree_id if parent changed
             old_values = type(self).objects.filter(pk=self.pk).values("parent_id", "tree_id").first()
-            if self.parent_id != old_values.get("parent_id"):
-                # Prevent circular references: check if parent is one of the descendants
-                if f"{self.TREE_SEP}{self.pk}{self.TREE_SEP}" in self.parent.tree_id:
-                    raise ValidationError(_("Cannot set a descendant as parent. This would create a circular reference."))
+            if old_values and self.parent_id != old_values.get("parent_id"):
+                # Prevent circular references only when there is a parent
+                if self.parent is not None:
+                    # Prevent circular references: check if parent is one of the descendants
+                    if f"{self.TREE_SEP}{self.pk}{self.TREE_SEP}" in (self.parent.tree_id or ""):
+                        raise ValidationError(_("Cannot set a descendant as parent. This would create a circular reference."))
 
-                # If trying to set self as parent
-                if self.parent.pk == self.pk:
-                    raise ValidationError(_("Cannot set self as parent. This would create a circular reference."))
+                    # If trying to set self as parent
+                    if self.parent.pk == self.pk:
+                        raise ValidationError(_("Cannot set self as parent. This would create a circular reference."))
 
                 self.tree_id = self._generate_tree_id()
                 type(self).objects\
