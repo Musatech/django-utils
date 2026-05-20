@@ -51,6 +51,36 @@ msgstr ""
 msgid "Invalid document number. Must be a valid CNPJ."
 msgstr ""
 
+#: django/validators/char.py:27
+#, python-format
+msgid "Must have at least %(words)s words."
+msgstr ""
+
+#: django/validators/char.py:31
+#, python-format
+msgid "Must have no more than %(words)s words."
+msgstr ""
+
+#: django/validators/char.py:35
+#, python-format
+msgid "Must have exactly %(words)s words."
+msgstr ""
+
+#: django/validators/char.py:59
+#, python-format
+msgid "Each word must be at least %(length)s characters long."
+msgstr ""
+
+#: django/validators/char.py:63
+#, python-format
+msgid "Each word must be no more than %(length)s characters long."
+msgstr ""
+
+#: django/validators/char.py:67
+#, python-format
+msgid "Each word must be exactly %(length)s characters long."
+msgstr ""
+
 #: django/validators/char.py:90
 msgid "Must not contain repeated words."
 msgstr ""
@@ -61,6 +91,26 @@ msgstr ""
 
 #: django/validators/char.py:116
 msgid "Each word must contain only alphabetic characters."
+msgstr ""
+
+#: django/validators/list.py:22
+#, python-format
+msgid "Length must be one of %(length)s characters."
+msgstr ""
+
+#: django/validators/list.py:26
+#, python-format
+msgid "Length must be at least %(length)s characters."
+msgstr ""
+
+#: django/validators/list.py:30
+#, python-format
+msgid "Length must be no more than %(length)s characters."
+msgstr ""
+
+#: django/validators/list.py:34
+#, python-format
+msgid "Length must be exactly %(length)s characters."
 msgstr ""
 
 #: django_filters/dates.py:14
