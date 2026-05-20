@@ -16,6 +16,9 @@ setup(
     url='https://github.com/Musatech/django-utils',
     packages=find_packages(exclude=['tests*']),
     include_package_data=True,
+    package_data={
+        'musa_django_utils': ['locale/*/LC_MESSAGES/*.po', 'locale/*/LC_MESSAGES/*.mo'],
+    },
     python_requires=">=3.7",
     install_requires=[
         'django',
