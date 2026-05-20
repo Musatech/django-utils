@@ -19,17 +19,17 @@ class LengthValidator:
         if self.operation == 'in_list':
             if len(value) not in self.length:
                 raise ValidationError(
-                    _(f"Length must be one of {self.length} characters.")
+                    _("Length must be one of %(length)s characters.") % {'length': self.length}
                 )
         elif self.operation == 'min' and len(value) < self.length:
             raise ValidationError(
-                _(f"Length must be at least {self.length} characters.")
+                _("Length must be at least %(length)s characters.") % {'length': self.length}
             )
         elif self.operation == 'max' and len(value) > self.length:
             raise ValidationError(
-                _(f"Length must be no more than {self.length} characters.")
+                _("Length must be no more than %(length)s characters.") % {'length': self.length}
             )
         elif self.operation == 'exact' and len(value) != self.length:
             raise ValidationError(
-                _(f"Length must be exactly {self.length} characters.")
+                _("Length must be exactly %(length)s characters.") % {'length': self.length}
             )

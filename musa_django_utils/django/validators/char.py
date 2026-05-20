@@ -24,15 +24,15 @@ class WordsCountValidator:
 
         if self.operation == 'min' and len(value.strip().split()) < self.words:
             raise ValidationError(
-                _(f"Must have at least {self.words} words.")
+                _("Must have at least %(words)s words.") % {'words': self.words}
             )
         elif self.operation == 'max' and len(value.strip().split()) > self.words:
             raise ValidationError(
-                _(f"Must have no more than {self.words} words.")
+                _("Must have no more than %(words)s words.") % {'words': self.words}
             )
         elif self.operation == 'exact' and len(value.strip().split()) != self.words:
             raise ValidationError(
-                _(f"Must have exactly {self.words} words.")
+                _("Must have exactly %(words)s words.") % {'words': self.words}
             )
 
 
@@ -56,15 +56,15 @@ class WordLengthValidator:
         for word in value.strip().split():
             if self.operation == 'min' and len(word) < self.length:
                 raise ValidationError(
-                    _(f"Each word must be at least {self.length} characters long.")
+                    _("Each word must be at least %(length)s characters long.") % {'length': self.length}
                 )
             elif self.operation == 'max' and len(word) > self.length:
                 raise ValidationError(
-                    _(f"Each word must be no more than {self.length} characters long.")
+                    _("Each word must be no more than %(length)s characters long.") % {'length': self.length}
                 )
             elif self.operation == 'exact' and len(word) != self.length:
                 raise ValidationError(
-                    _(f"Each word must be exactly {self.length} characters long.")
+                    _("Each word must be exactly %(length)s characters long.") % {'length': self.length}
                 )
 
 

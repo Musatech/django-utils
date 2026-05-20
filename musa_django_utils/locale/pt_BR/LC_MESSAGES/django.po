@@ -52,6 +52,36 @@ msgstr "Número de documento inválido. Deve ser um CPF válido."
 msgid "Invalid document number. Must be a valid CNPJ."
 msgstr "Número de documento inválido. Deve ser um CNPJ válido."
 
+#: django/validators/char.py:27
+#, python-format
+msgid "Must have at least %(words)s words."
+msgstr "Deve ter pelo menos %(words)s palavras."
+
+#: django/validators/char.py:31
+#, python-format
+msgid "Must have no more than %(words)s words."
+msgstr "Deve ter no máximo %(words)s palavras."
+
+#: django/validators/char.py:35
+#, python-format
+msgid "Must have exactly %(words)s words."
+msgstr "Deve ter exatamente %(words)s palavras."
+
+#: django/validators/char.py:59
+#, python-format
+msgid "Each word must be at least %(length)s characters long."
+msgstr "Cada palavra deve ter pelo menos %(length)s caracteres."
+
+#: django/validators/char.py:63
+#, python-format
+msgid "Each word must be no more than %(length)s characters long."
+msgstr "Cada palavra deve ter no máximo %(length)s caracteres."
+
+#: django/validators/char.py:67
+#, python-format
+msgid "Each word must be exactly %(length)s characters long."
+msgstr "Cada palavra deve ter exatamente %(length)s caracteres."
+
 #: django/validators/char.py:90
 msgid "Must not contain repeated words."
 msgstr "Não deve conter palavras repetidas."
@@ -63,6 +93,26 @@ msgstr "Não deve conter palavras repetidas sequencialmente."
 #: django/validators/char.py:116
 msgid "Each word must contain only alphabetic characters."
 msgstr "Cada palavra deve conter apenas caracteres alfabéticos."
+
+#: django/validators/list.py:22
+#, python-format
+msgid "Length must be one of %(length)s characters."
+msgstr "O tamanho deve ser um dos seguintes: %(length)s caracteres."
+
+#: django/validators/list.py:26
+#, python-format
+msgid "Length must be at least %(length)s characters."
+msgstr "O tamanho deve ser de pelo menos %(length)s caracteres."
+
+#: django/validators/list.py:30
+#, python-format
+msgid "Length must be no more than %(length)s characters."
+msgstr "O tamanho deve ser de no máximo %(length)s caracteres."
+
+#: django/validators/list.py:34
+#, python-format
+msgid "Length must be exactly %(length)s characters."
+msgstr "O tamanho deve ser de exatamente %(length)s caracteres."
 
 #: django_filters/dates.py:14
 msgid "Accepts mm-yyyy, multiple values may be separated by commas."
