@@ -5,6 +5,11 @@ from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 
 
+def _strip_document(value: str) -> str:
+    """Remove formatting characters, preserve alphanumeric, uppercase."""
+    return re.sub(r"[^A-Z0-9]", "", value.upper())
+
+
 @deconstructible
 class CPFCNPJValidator:
     code = "invalid_document"
@@ -13,9 +18,9 @@ class CPFCNPJValidator:
     accept_cpf = True
 
     def __call__(self, value):
-        value = re.sub(r"\D", "", value)
+        value = _strip_document(value)
 
-        if len(value) == 11 and self.accept_cpf:
+        if len(value) == 11 and value.isdigit() and self.accept_cpf:
             if not self._is_valid_cpf(value):
                 raise ValidationError(self.message, code=self.code)
 
@@ -37,15 +42,20 @@ class CPFCNPJValidator:
                 return False
         return True
 
+    @staticmethod
+    def _char_value(c: str) -> int:
+        """0-9 → 0-9; A-Z → 17-42 (IN RFB 2229/2024: ord(c) - 48)."""
+        return ord(c) - 48
+
     def _is_valid_cnpj(self, cnpj):
-        if cnpj == cnpj[0] * 14:
+        if len(set(cnpj)) == 1:
             return False
 
         pesos_1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
         pesos_2 = [6] + pesos_1
 
         for pesos in (pesos_1, pesos_2):
-            soma = sum(int(cnpj[i]) * pesos[i] for i in range(len(pesos)))
+            soma = sum(self._char_value(cnpj[i]) * pesos[i] for i in range(len(pesos)))
             digito = 11 - (soma % 11)
             digito = 0 if digito >= 10 else digito
             if digito != int(cnpj[len(pesos)]):
