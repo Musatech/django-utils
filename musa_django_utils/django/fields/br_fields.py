@@ -1,6 +1,7 @@
 from django.db.models import CharField
 
 from ..validators import CPFCNPJValidator
+from ..validators.br_document import _strip_document
 
 
 class CPFCNPJField(CharField):
@@ -14,12 +15,10 @@ class CPFCNPJField(CharField):
     def to_python(self, value):
         if value is None:
             return value
-        # Remove any formatting characters
-        return ''.join(filter(str.isdigit, value))
+        return _strip_document(value)
 
     def get_prep_value(self, value):
         value = super().get_prep_value(value)
         if value is None:
             return value
-        # Ensure the value is stored without formatting
-        return ''.join(filter(str.isdigit, value))
+        return _strip_document(value)
