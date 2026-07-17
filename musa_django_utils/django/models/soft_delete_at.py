@@ -32,7 +32,7 @@ class SoftDeleteAtQueryset(QuerySet):
 
 
 class SoftDeleteAtModel(Model):
-    deleted_at = DateTimeField(null=True, blank=True, db_index=True)
+    deleted_at = DateTimeField(null=True, db_index=True)
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
